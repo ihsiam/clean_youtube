@@ -1,4 +1,5 @@
 import { PlayCircleOutline } from "@mui/icons-material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Button, Stack } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -12,6 +13,8 @@ export default function PlaylistCard({
   playListTitle,
   channelTitle,
   playListId,
+  btnText,
+  action,
 }) {
   return (
     <Card
@@ -19,7 +22,7 @@ export default function PlaylistCard({
         maxWidth: 345,
         height: "100%",
         display: "flex",
-        flexDirection: "column", // stack vertically
+        flexDirection: "column",
       }}
     >
       <CardMedia
@@ -37,7 +40,14 @@ export default function PlaylistCard({
         </Typography>
       </CardContent>
 
-      <CardActions disableSpacing sx={{ mt: "auto" }}>
+      <CardActions
+        disableSpacing
+        sx={{
+          mt: "auto",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         <Button to={`/player/${playListId}`} component={Link}>
           <Stack direction="row" spacing={1} alignItems="center">
             <PlayCircleOutline />
@@ -46,6 +56,16 @@ export default function PlaylistCard({
             </Typography>
           </Stack>
         </Button>
+        {btnText && (
+          <Button onClick={() => action(playListId)}>
+            <Stack direction="row" spacing={1} alignItems="center">
+              <FavoriteIcon color="primary" />
+              <Typography variant="body2" fontWeight={600}>
+                {btnText}
+              </Typography>
+            </Stack>
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

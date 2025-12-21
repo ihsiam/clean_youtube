@@ -15,9 +15,23 @@ export default function PlaylistForm({ open, handleClose }) {
     (actions) => actions.playlists.getPlaylist
   );
 
+  const extractPlaylistId = (input) => {
+    try {
+      if (input.includes("list=")) {
+        return new URL(input).searchParams.get("list");
+      }
+      return input.trim();
+    } catch {
+      return input.trim();
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    getPlaylist(value);
+    const playListId = extractPlaylistId(value);
+    if (!playListId) return;
+
+    getPlaylist(playListId);
     setValue("");
     handleClose();
   };
