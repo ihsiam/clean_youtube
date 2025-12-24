@@ -1,7 +1,8 @@
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import PlaylistPlayer from "./PlaylistPlayer";
 
 const PlayListDetalis = () => {
   const { playListId } = useParams();
@@ -14,9 +15,7 @@ const PlayListDetalis = () => {
 
   return (
     <Container maxWidth={"lg"} sx={{ my: 16 }}>
-      <Typography variant="h2" align="center">
-        {playlist.playListTitle}
-      </Typography>
+      <PlaylistPlayer playlist={playlist} />
     </Container>
   );
 };

@@ -1,11 +1,14 @@
 import { PlayCircleOutline } from "@mui/icons-material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { Button, Stack } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function PlaylistCard({
@@ -19,29 +22,45 @@ export default function PlaylistCard({
   return (
     <Card
       sx={{
-        maxWidth: 345,
-        height: "100%",
+        width: 345, // FIXED WIDTH
+        height: 350, // optional fixed height
         display: "flex",
         flexDirection: "column",
       }}
     >
+      {/* IMAGE – FIXED HEIGHT */}
       <CardMedia
         component="img"
         image={playlistThumbnails.url}
         alt={playListTitle}
+        sx={{
+          height: 180,
+          objectFit: "cover",
+        }}
       />
 
+      {/* CONTENT */}
       <CardContent sx={{ flexGrow: 1 }}>
-        <Typography variant="h6" sx={{ color: "text.primary" }}>
+        {/* TITLE – FIXED LINES */}
+        <Typography
+          variant="h6"
+          sx={{
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
           {playListTitle}
         </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
+
+        <Typography variant="body2" color="text.secondary" noWrap>
           {channelTitle}
         </Typography>
       </CardContent>
 
+      {/* ACTIONS – STAY AT BOTTOM */}
       <CardActions
-        disableSpacing
         sx={{
           mt: "auto",
           display: "flex",
@@ -56,6 +75,7 @@ export default function PlaylistCard({
             </Typography>
           </Stack>
         </Button>
+
         {btnText && (
           <Button onClick={() => action(playListId)}>
             <Stack direction="row" spacing={1} alignItems="center">
